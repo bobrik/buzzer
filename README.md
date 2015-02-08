@@ -19,7 +19,7 @@ import (
     "log"
     "io"
     "os"
-    "http"
+    "net/http"
     "github.com/bobrik/buzzer"
 )
 
