@@ -6,7 +6,6 @@ package buzzer
 
 import (
 	"net"
-	"syscall"
 	"time"
 )
 
@@ -35,15 +34,7 @@ func dial(network, address string, dialer net.Dialer) (net.Conn, error) {
 		conn, err := dialer.Dial(network, net.JoinHostPort(ip.String(), port))
 		if err != nil {
 			lastErr = err
-
-			switch e := err.(type) {
-			case *net.OpError:
-				if e.Err == syscall.ECONNREFUSED || e.Temporary() {
-					continue
-				}
-			default:
-				return conn, err
-			}
+			continue
 		}
 
 		return conn, err
